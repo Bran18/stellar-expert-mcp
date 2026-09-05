@@ -150,6 +150,35 @@ curl -s -X POST http://127.0.0.1:3000/mcp \
 
 This v1 ships a Node process (`npm run start:http`). Host it on Fly, a VM, or similar; do not bind `0.0.0.0` without `ALLOWED_HOSTS` / a proxy.
 
+## Publishing to npm
+
+npm is deprecating 2FA-bypass granular access tokens for account/package management (already in effect) and for direct publish (targeted January 2027). This repo does **not** use a long-lived `NPM_TOKEN`. Releases go through [trusted publishing (OIDC)](https://docs.npmjs.com/trusted-publishers/).
+
+**First publish** (package does not exist yet — trusted publishers can only be attached after it does):
+
+```sh
+npm login --auth-type=web
+npm publish --access public --otp=YOUR_AUTHENTICATOR_CODE
+```
+
+Then on [npmjs.com → stellar-expert-mcp → Settings → Trusted Publisher](https://www.npmjs.com/package/stellar-expert-mcp):
+
+- Organization or user: `Bran18`
+- Repository: `stellar-expert-mcp`
+- Workflow filename: `publish.yml`
+- Allow `npm publish` (and/or `npm stage publish`)
+
+**Later versions:** bump `version` in `package.json`, commit, tag, push:
+
+```sh
+git tag v0.1.1
+git push origin v0.1.1
+```
+
+[`.github/workflows/publish.yml`](.github/workflows/publish.yml) publishes from GitHub-hosted runners with `id-token: write`. No bypass-2FA token.
+
+Provenance attestations require a **public** GitHub repo. This repository is private, so npm will publish without provenance until you change visibility.
+
 ## Development
 
 ```sh

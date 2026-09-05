@@ -19,8 +19,9 @@
   "scripts": {
     "start": "tsx src/stdio.ts",
     "start:http": "tsx src/http.ts",
-    "build": "tsc",
+    "build": "tsc && node --eval \"import {chmodSync} from 'node:fs'; chmodSync('dist/stdio.js', 0o755); chmodSync('dist/http.js', 0o755);\"",
     "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
     "verify": "tsx scripts/verify.ts",
     "inspector": "npx @modelcontextprotocol/inspector npx tsx src/stdio.ts"
   },
@@ -32,8 +33,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/stellar-expert/stellar-expert-mcp"
+    "url": "git+https://github.com/Bran18/stellar-expert-mcp.git"
   },
+  "bugs": {
+    "url": "https://github.com/Bran18/stellar-expert-mcp/issues"
+  },
+  "homepage": "https://github.com/Bran18/stellar-expert-mcp#readme",
   "dependencies": {
     "@modelcontextprotocol/express": "^2.0.0",
     "@modelcontextprotocol/node": "^2.0.0",
