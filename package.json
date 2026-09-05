@@ -1,0 +1,50 @@
+{
+  "name": "stellar-expert-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for the StellarExpert Open API (directory, assets, ledger helpers).",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "stellar-expert-mcp": "./dist/stdio.js",
+    "stellar-expert-mcp-http": "./dist/http.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "start": "tsx src/stdio.ts",
+    "start:http": "tsx src/http.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "verify": "tsx scripts/verify.ts",
+    "inspector": "npx @modelcontextprotocol/inspector npx tsx src/stdio.ts"
+  },
+  "keywords": [
+    "mcp",
+    "stellar",
+    "stellar-expert",
+    "model-context-protocol"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stellar-expert/stellar-expert-mcp"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/express": "^2.0.0",
+    "@modelcontextprotocol/node": "^2.0.0",
+    "@modelcontextprotocol/server": "^2.0.0",
+    "express": "^5.2.1",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.4.1",
+    "tsx": "^4.23.13",
+    "typescript": "~5.9.3"
+  }
+}
