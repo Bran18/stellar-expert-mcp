@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "stellar-expert": {
+      "command": "npx",
+      "args": ["-y", "stellar-expert-mcp"]
+    },
+    "stellar-expert-http": {
+      "url": "http://127.0.0.1:3000/mcp"
+    }
+  }
+}
