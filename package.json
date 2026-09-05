@@ -8,8 +8,11 @@
     "node": ">=20"
   },
   "bin": {
-    "stellar-expert-mcp": "./dist/stdio.js",
-    "stellar-expert-mcp-http": "./dist/http.js"
+    "stellar-expert-mcp": "dist/stdio.js",
+    "stellar-expert-mcp-http": "dist/http.js"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "files": [
     "dist",

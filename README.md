@@ -154,12 +154,18 @@ This v1 ships a Node process (`npm run start:http`). Host it on Fly, a VM, or si
 
 npm is deprecating 2FA-bypass granular access tokens for account/package management (already in effect) and for direct publish (targeted January 2027). This repo does **not** use a long-lived `NPM_TOKEN`. Releases go through [trusted publishing (OIDC)](https://docs.npmjs.com/trusted-publishers/).
 
-**First publish** (package does not exist yet — trusted publishers can only be attached after it does):
+**First publish** (the package does not exist yet — trusted publishers can only be attached after it does).
+
+`npm login --auth-type=web` only signs you in. It is **not** package-publish 2FA. npm now requires account 2FA (or a bypass-2FA token, which we are not using) for every new package. `--auth-type=web` on `npm publish` will not open a second browser prompt if you are already logged in.
+
+1. Enable 2FA on the **npm** account (not GitHub): [Two-Factor Authentication](https://www.npmjs.com/settings/~/tfa) — authenticator app, `auth-and-writes`.
+2. Then, from this repo, use the **6-digit npm** code (refreshes every 30s):
 
 ```sh
-npm login --auth-type=web
-npm publish --access public --otp=YOUR_AUTHENTICATOR_CODE
+npm publish --access public --otp=123456
 ```
+
+`npx stellar-expert-mcp` returning 404 is expected until this first publish succeeds.
 
 Then on [npmjs.com → stellar-expert-mcp → Settings → Trusted Publisher](https://www.npmjs.com/package/stellar-expert-mcp):
 
